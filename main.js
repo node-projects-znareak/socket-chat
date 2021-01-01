@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
 const config = {
-  port: 80,
+  port: 4000,
 };
 
 app.use(express.static("public"));
@@ -11,8 +15,9 @@ app.use(express.static("public"));
 const messages = [
   {
     id: 1,
-    author: "Jesús",
-    text: "ssdds",
+    author: "<mark>Administrador</mark>",
+    text: "Bienvenido al chat, creador por zNareak",
+    isAdmin : true,
   },
 ];
 
@@ -22,7 +27,7 @@ io.on("connection", (socket) => {
 
   socket.on("new-message", (message) => {
     messages.push(message);
-    io.sockets.emit("messages", messages)
+    io.sockets.emit("messages", messages);
   });
 });
 

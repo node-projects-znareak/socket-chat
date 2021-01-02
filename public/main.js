@@ -1,5 +1,5 @@
 const messages = document.getElementById("messages");
-const socket = io.connect("http://201.242.175.188:4000/", {
+const socket = io.connect("190.74.252.21:4000/", {
   forceNew: true,
 });
 
@@ -44,6 +44,15 @@ form.text.addEventListener("keydown", (e) => {
   if (e.keyCode == 13 && form.text.value !== "" && form.author.value !== "") {
     sendMessage();
   }
+});
+
+form.author.addEventListener("blur", (e) => {
+  const name = e.target.value;
+  localStorage.setItem("author", name);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  form.author.value = localStorage.getItem("author") || "Anónimo";
 });
 
 socket.on("messages", (message) => {

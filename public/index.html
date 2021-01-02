@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/png" />
     <title>Chat con websocket</title>
   </head>
   <body>
@@ -36,6 +37,7 @@
             name="text"
             cols="30"
             rows="10"
+            id="text"
             class="form-control shadow-sm"
             placeholder="Escribe el mensaje..."
             required
@@ -52,7 +54,7 @@
       </form>
     </div>
 
-    <audio src="./pin.mp3" style="display: none;" id="alert"></audio>
+    <audio src="./pin.mp3" style="display: none" id="alert"></audio>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./main.js"></script>
     <script
@@ -65,5 +67,14 @@
       integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdn.tiny.cloud/1/kww64sfbzctem1xymf9lz577a9g2kwncndxyziwtx6893oyw/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+    <script>
+      tinymce.init({
+        selector: "#text",
+      });
+    </script>
   </body>
 </html>

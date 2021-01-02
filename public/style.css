@@ -38,6 +38,12 @@ textarea.form-control {
   color: #54e346 !important;
 }
 
+#form textarea {
+  font-size: 14px;
+  min-height: 350px;
+  max-width: 100%;
+}
+
 #messages {
   background: #161a20;
   padding: 1rem;
@@ -68,6 +74,11 @@ textarea.form-control {
 .message .author {
   margin-bottom: 4px;
   display: block;
+  letter-spacing: 0.4px;
+}
+
+.message .author > mark {
+  border-radius: 4px;
 }
 
 .container {

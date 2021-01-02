@@ -49,7 +49,7 @@ textarea.form-control {
   padding: 1rem;
   height: auto;
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 500px;
   margin-bottom: 1rem;
   border-radius: 5px;
   font-size: 12px;
@@ -71,6 +71,15 @@ textarea.form-control {
   background: rgba(204, 204, 204, 0.466);
 }
 
+.message {
+  display: flex;
+}
+
+.message .message-perfil {
+  display: block;
+  margin-right: 6px;
+}
+
 .message .author {
   margin-bottom: 4px;
   display: block;
@@ -79,6 +88,10 @@ textarea.form-control {
 
 .message .author > mark {
   border-radius: 4px;
+}
+
+.message .message-content p {
+  word-break: break-all;
 }
 
 .container {

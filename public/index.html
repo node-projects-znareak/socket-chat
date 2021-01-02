@@ -15,42 +15,48 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="./favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="./skull.PNG" type="image/png" />
     <title>Chat con websocket</title>
   </head>
   <body>
     <div class="container mt-5">
-      <div id="messages" class="shadow-sm"></div>
-
-      <form id="form">
-        <div class="mb-2">
-          <input
-            type="text"
-            name="author"
-            placeholder="Escribe tu nombre..."
-            class="form-control shadow-sm"
-            required
-          />
-        </div>
-        <div class="mb-2">
-          <textarea
-            name="text"
-            cols="30"
-            rows="10"
-            id="text"
-            class="form-control shadow-sm"
-            placeholder="Escribe el mensaje..."
-          ></textarea>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div id="messages" class="shadow-sm"></div>
         </div>
 
-        <div class="d-grid mt-1">
-          <input
-            type="submit"
-            value="Enviar"
-            class="btn btn-success shadow-sm"
-          />
+        <div class="col-md-12 col-lg-6">
+          <form id="form">
+            <div class="mb-2">
+              <input
+                type="text"
+                name="author"
+                placeholder="Escribe tu nombre..."
+                class="form-control shadow-sm"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <textarea
+                name="text"
+                cols="30"
+                rows="10"
+                id="text"
+                class="form-control shadow-sm"
+                placeholder="Escribe el mensaje..."
+              ></textarea>
+            </div>
+
+            <div class="d-grid mt-1">
+              <input
+                type="submit"
+                value="Enviar"
+                class="btn btn-success shadow-sm"
+              />
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
 
     <audio src="./pin.mp3" style="display: none" id="alert"></audio>
@@ -72,7 +78,19 @@
         selector: "#text",
         skin: "oxide-dark",
         content_css: "dark",
+        // quitar los parrafos extras q agrega tinymce
+        forced_root_block: "",
+        force_br_newlines: true,
+        force_p_newlines: false,
       });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"
+      referrerpolicy="origin"
+    ></script>
+    <script>
+      var md5Hash = CryptoJS.MD5("libardo");
+      console.log(md5Hash.toString());
     </script>
   </body>
 </html>

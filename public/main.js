@@ -7,10 +7,14 @@ const form = document.getElementById("form");
 const audio = document.getElementById("alert");
 
 const renderMessage = ({ id, text, author } = {}) => {
-  const tpl = `<div id="${id}" class="message">
-   <strong class="author">${author}</strong>
-   <p>${text}</p>
-</div>
+  const tpl = `
+    <div id="${id}" class="message">
+      <img src="./anon.jpg" width="40" height="40" class="message-perfil"/>
+      <div class="message-content">
+        <strong class="author">${author}</strong>
+        <p>${text}</p>
+      </div>
+    </div>
 `;
 
   return tpl;

@@ -25,9 +25,10 @@ const render = (messages) => {
 };
 
 const sendMessage = () => {
+  const text = tinymce.activeEditor.getContent();
   const payload = {
     author: form.author.value,
-    text: form.text.value,
+    text,
     id: 300,
   };
 

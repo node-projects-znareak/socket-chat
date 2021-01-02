@@ -5,6 +5,7 @@ const socket = io.connect("190.74.252.21:4000/", {
 
 const form = document.getElementById("form");
 const audio = document.getElementById("alert");
+const isPauseAudio = document.getElementById("pause-sound");
 
 const renderMessage = ({ id, text, author } = {}) => {
   const tpl = `
@@ -58,6 +59,11 @@ form.author.addEventListener("blur", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   form.author.value = localStorage.getItem("author") || "Anónimo";
+  isPauseAudio.checked = !!localStorage.getItem("isPauseAudio");
+});
+
+isPauseAudio.addEventListener("change", (e) => {
+  localStorage.setItem("isPauseAudio", e.target.checked);
 });
 
 window.addEventListener("focus", () => {
@@ -67,6 +73,10 @@ window.addEventListener("focus", () => {
 socket.on("messages", (message) => {
   messages.innerHTML = render(message);
   messages.scrollTop = messages.scrollHeight;
-  audio.play();
+
+  if (!isPauseAudio.checked) {
+    audio.play();
+  }
+
   document.title = "● ch4t.html";
 });

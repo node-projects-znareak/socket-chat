@@ -43,7 +43,6 @@ const sendMessage = () => {
   };
 
   socket.emit("new-message", payload);
-  form.text.value = "";
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -58,6 +57,7 @@ window.addEventListener("focus", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   sendMessage();
+  tinyMCE.activeEditor.setContent('');
 });
 
 form.text.addEventListener("keydown", (e) => {

@@ -60,8 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
   form.author.value = localStorage.getItem("author") || "Anónimo";
 });
 
+window.addEventListener("focus", () => {
+  document.title = "ch4t.html";
+});
+
 socket.on("messages", (message) => {
   messages.innerHTML = render(message);
   messages.scrollTop = messages.scrollHeight;
   audio.play();
+  document.title = "● ch4t.html";
 });

@@ -27,7 +27,7 @@
 
         <div class="col-md-12 col-lg-6">
           <form id="form">
-            <div class="mb-2">
+            <div class="mb-3">
               <input
                 type="text"
                 name="author"
@@ -36,7 +36,20 @@
                 required
               />
             </div>
-            <div class="mb-2">
+
+            <div class="mb-3">
+              <label for="perfil-image" class="form-label"
+                >Imágen de perfil</label
+              >
+              <input
+                class="form-control"
+                type="file"
+                id="perfil-image"
+                accept="image/*"
+              />
+            </div>
+
+            <div class="mb-3">
               <textarea
                 name="text"
                 cols="30"
@@ -46,6 +59,7 @@
                 placeholder="Escribe el mensaje..."
               ></textarea>
             </div>
+
             <div class="form-check">
               <input
                 class="form-check-input"

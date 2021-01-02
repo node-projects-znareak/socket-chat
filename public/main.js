@@ -6,11 +6,15 @@ const socket = io.connect("190.74.252.21:4000/", {
 const form = document.getElementById("form");
 const audio = document.getElementById("alert");
 const isPauseAudio = document.getElementById("pause-sound");
+const perfilImage = document.getElementById("perfil-image");
+const fr = new FileReader();
 
-const renderMessage = ({ id, text, author } = {}) => {
+const renderMessage = ({ id, text, author, perfilImage } = {}) => {
   const tpl = `
     <div id="${id}" class="message">
-      <img src="./anon.jpg" width="40" height="40" class="message-perfil"/>
+      <img src="${
+        perfilImage ? perfilImage : "./anon.jpg"
+      }" class="message-perfil"/>
       <div class="message-content">
         <strong class="author">${author}</strong>
         <p>${text}</p>
@@ -35,11 +39,21 @@ const sendMessage = () => {
     author: form.author.value,
     text,
     id: 300,
+    perfilImage: localStorage.getItem("perfil_image") || fr.result || null,
   };
 
   socket.emit("new-message", payload);
   form.text.value = "";
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  form.author.value = localStorage.getItem("author") || "Anónimo";
+  isPauseAudio.checked = !!localStorage.getItem("isPauseAudio");
+});
+
+window.addEventListener("focus", () => {
+  document.title = "ch4t.html";
+});
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -54,20 +68,27 @@ form.text.addEventListener("keydown", (e) => {
 
 form.author.addEventListener("blur", (e) => {
   const name = e.target.value;
-  localStorage.setItem("author", name);
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-  form.author.value = localStorage.getItem("author") || "Anónimo";
-  isPauseAudio.checked = !!localStorage.getItem("isPauseAudio");
+  if (name.match(/zNareak/gi)) {
+    alert("Ese nombre no está permitido como usuario...");
+    form.author.value = "Anónimo";
+    return;
+  }
+
+  localStorage.setItem("author", name);
 });
 
 isPauseAudio.addEventListener("change", (e) => {
   localStorage.setItem("isPauseAudio", e.target.checked);
 });
 
-window.addEventListener("focus", () => {
-  document.title = "ch4t.html";
+perfilImage.addEventListener("change", (e) => {
+  const imageFile = e.target.files[0];
+  fr.readAsDataURL(imageFile);
+});
+
+fr.addEventListener("load", () => {
+  localStorage.setItem("perfil_image", fr.result);
 });
 
 socket.on("messages", (message) => {
